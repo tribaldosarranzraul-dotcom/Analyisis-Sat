@@ -1,515 +1,222 @@
-/* Archivo completo de CSS */
-:root {
-    --primary: #2c3e50;
-    --secondary: #3498db;
-    --success: #27ae60;
-    --warning: #f39c12;
-    --danger: #e74c3c;
-    --light: #ecf0f1;
-    --dark: #34495e;
-    --gray: #95a5a6;
-}
-
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-body {
-    background-color: #f5f7fa;
-    color: #333;
-    line-height: 1.6;
-}
-
-.container {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 20px;
-}
-
-/* Header */
-header {
-    background: linear-gradient(135deg, var(--primary), var(--dark));
-    color: white;
-    padding: 1.5rem;
-    border-radius: 10px;
-    margin-bottom: 2rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.header-content {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-}
-
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.logo i {
-    font-size: 2.5rem;
-    color: var(--secondary);
-}
-
-.logo h1 {
-    font-size: 1.8rem;
-}
-
-.logo span {
-    color: var(--secondary);
-}
-
-.search-section {
-    display: flex;
-    gap: 10px;
-    margin-top: 15px;
-    width: 100%;
-}
-
-.search-box {
-    flex: 1;
-    padding: 12px 15px;
-    border-radius: 5px;
-    border: none;
-    font-size: 1rem;
-}
-
-.search-btn, .clear-btn {
-    padding: 12px 20px;
-    background-color: var(--secondary);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: all 0.3s;
-}
-
-.search-btn:hover, .clear-btn:hover {
-    background-color: #2980b9;
-    transform: translateY(-2px);
-}
-
-.clear-btn {
-    background-color: var(--gray);
-}
-
-/* Main layout */
-.main-content {
-    display: grid;
-    grid-template-columns: 300px 1fr;
-    gap: 25px;
-}
-
-/* Sidebar */
-.sidebar {
-    background-color: white;
-    border-radius: 10px;
-    padding: 25px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-    height: fit-content;
-}
-
-.sidebar h3 {
-    color: var(--primary);
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 2px solid var(--light);
-}
-
-.selected-assets {
-    list-style: none;
-    margin-bottom: 30px;
-}
-
-.selected-assets li {
-    background-color: var(--light);
-    margin-bottom: 10px;
-    padding: 12px 15px;
-    border-radius: 5px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-left: 4px solid var(--secondary);
-}
-
-.asset-name {
-    font-weight: 600;
-}
-
-.asset-type {
-    font-size: 0.8rem;
-    background-color: var(--gray);
-    color: white;
-    padding: 2px 8px;
-    border-radius: 10px;
-}
-
-.analysis-controls {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.control-group {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.control-group label {
-    font-weight: 600;
-    color: var(--dark);
-}
-
-.control-group select {
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-    background-color: white;
-}
-
-.timeframe-buttons {
-    display: flex;
-    gap: 5px;
-}
-
-.time-btn {
-    flex: 1;
-    padding: 8px;
-    background-color: var(--light);
-    border: 1px solid #ddd;
-    border-radius: 3px;
-    cursor: pointer;
-    text-align: center;
-}
-
-.time-btn.active {
-    background-color: var(--secondary);
-    color: white;
-    border-color: var(--secondary);
-}
-
-.quick-tip {
-    margin-top: 30px;
-    padding: 15px;
-    background-color: #f8f9fa;
-    border-radius: 8px;
-}
-
-/* Dashboard */
-.dashboard {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
-    gap: 25px;
-}
-
-.dashboard-card {
-    background-color: white;
-    border-radius: 10px;
-    padding: 25px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-}
-
-.card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--light);
-}
-
-.card-header h3 {
-    color: var(--primary);
-}
-
-.card-header i {
-    color: var(--secondary);
-    font-size: 1.2rem;
-}
-
-.chart-container {
-    height: 300px;
-    position: relative;
-}
-
-/* Tabs */
-.tabs {
-    display: flex;
-    border-bottom: 1px solid #ddd;
-    margin-bottom: 20px;
-}
-
-.tab-btn {
-    padding: 10px 20px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-weight: 600;
-    color: var(--gray);
-    border-bottom: 3px solid transparent;
-}
-
-.tab-btn.active {
-    color: var(--secondary);
-    border-bottom: 3px solid var(--secondary);
-}
-
-.tab-content {
-    display: none;
-}
-
-.tab-content.active {
-    display: block;
-}
-
-/* Métricas */
-.metrics-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    gap: 15px;
-    margin-top: 20px;
-}
-
-.metric-card {
-    background-color: #f8f9fa;
-    padding: 15px;
-    border-radius: 8px;
-    text-align: center;
-    border-top: 4px solid var(--secondary);
-}
-
-.metric-card.warning {
-    border-top-color: var(--warning);
-}
-
-.metric-card.danger {
-    border-top-color: var(--danger);
-}
-
-.metric-card.success {
-    border-top-color: var(--success);
-}
-
-.metric-value {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin: 5px 0;
-}
-
-.metric-label {
-    font-size: 0.85rem;
-    color: var(--gray);
-}
-
-/* Tabla de señales */
-.comparison-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 15px;
-}
-
-.comparison-table th {
-    background-color: var(--primary);
-    color: white;
-    padding: 12px 15px;
-    text-align: left;
-}
-
-.comparison-table td {
-    padding: 12px 15px;
-    border-bottom: 1px solid #eee;
-}
-
-.comparison-table tr:hover {
-    background-color: #f9f9f9;
-}
-
-/* Indicadores de señal */
-.signal-indicator {
-    display: inline-block;
-    padding: 4px 10px;
-    border-radius: 20px;
-    font-size: 0.8rem;
-    font-weight: 600;
-}
-
-.signal-buy {
-    background-color: rgba(39, 174, 96, 0.15);
-    color: var(--success);
-}
-
-.signal-sell {
-    background-color: rgba(231, 76, 60, 0.15);
-    color: var(--danger);
-}
-
-.signal-hold {
-    background-color: rgba(243, 156, 18, 0.15);
-    color: var(--warning);
-}
-
-/* Checklist */
-.checklist-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    margin-top: 15px;
-}
-
-.checklist-item {
-    padding: 10px;
-    background-color: #f8f9fa;
-    border-radius: 5px;
-    font-size: 0.9rem;
-}
-
-.checklist-item input {
-    margin-right: 8px;
-}
-
-/* Performance metrics */
-.performance-metrics {
-    margin-top: 20px;
-    display: flex;
-    justify-content: space-around;
-}
-
-.metric-item {
-    text-align: center;
-}
-
-/* Catalizadores */
-.catalysts-list {
-    background-color: #f8f9fa;
-    padding: 15px;
-    border-radius: 8px;
-    margin-top: 15px;
-}
-
-.catalysts-list ul {
-    padding-left: 20px;
-}
-
-.catalysts-list li {
-    margin-bottom: 8px;
-}
-
-/* Tooltip */
-.tooltip {
-    position: relative;
-    display: inline-block;
-    cursor: pointer;
-    margin-left: 5px;
-    color: var(--secondary);
-}
-
-.tooltip .tooltiptext {
-    visibility: hidden;
-    width: 300px;
-    background-color: var(--dark);
-    color: white;
-    text-align: left;
-    padding: 10px;
-    border-radius: 6px;
-    position: absolute;
-    z-index: 1;
-    bottom: 125%;
-    left: 50%;
-    transform: translateX(-50%);
-    opacity: 0;
-    transition: opacity 0.3s;
-    font-size: 0.85rem;
-    font-weight: normal;
-}
-
-.tooltip:hover .tooltiptext {
-    visibility: visible;
-    opacity: 1;
-}
-
-/* Score bars */
-.score-bar {
-    height: 10px;
-    background-color: #eee;
-    border-radius: 5px;
-    margin-top: 5px;
-    overflow: hidden;
-}
-
-.score-fill {
-    height: 100%;
-    border-radius: 5px;
-}
-
-.score-0-33 { width: 33%; background-color: var(--danger); }
-.score-34-66 { width: 66%; background-color: var(--warning); }
-.score-67-100 { width: 100%; background-color: var(--success); }
-
-/* Remove asset button */
-.remove-asset {
-    cursor: pointer;
-    color: var(--gray);
-    transition: color 0.3s;
-}
-
-.remove-asset:hover {
-    color: var(--danger);
-}
-
-/* Footer */
-footer {
-    margin-top: 40px;
-    padding: 20px;
-    text-align: center;
-    color: var(--gray);
-    font-size: 0.9rem;
-    border-top: 1px solid #eee;
-}
-
-.disclaimer {
-    margin-top: 10px;
-    font-size: 0.8rem;
-}
-
-/* Responsive */
-@media (max-width: 1100px) {
-    .main-content {
-        grid-template-columns: 1fr;
-    }
-    
-    .dashboard {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 768px) {
-    .header-content {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    
-    .search-section {
-        flex-direction: column;
-    }
-    
-    .dashboard-card {
-        padding: 15px;
-    }
-    
-    .checklist-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .performance-metrics {
-        flex-direction: column;
-        gap: 15px;
-    }
-}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Satellite Analyzer - Dashboard de Análisis de Inversiones</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-satellite-dish"></i>
+                    <div>
+                        <h1>Satellite<span>Analyzer</span></h1>
+                        <p>Dashboard de análisis visual para inversiones satélite</p>
+                    </div>
+                </div>
+                
+                <div class="search-section">
+                    <input type="text" class="search-box" id="searchInput" 
+                           placeholder="Buscar por ticker, nombre o sector (ej: TSLA, ARKK, Biotecnología)">
+                    <button class="search-btn" id="searchBtn">
+                        <i class="fas fa-search"></i> Analizar
+                    </button>
+                    <button class="clear-btn" id="clearBtn">
+                        <i class="fas fa-redo"></i> Limpiar
+                    </button>
+                </div>
+            </div>
+        </header>
+        
+        <div class="main-content">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <h3><i class="fas fa-chart-line"></i> Activos Seleccionados</h3>
+                <ul class="selected-assets" id="selectedAssets">
+                    <!-- Los activos se cargarán aquí con JavaScript -->
+                </ul>
+                
+                <h3><i class="fas fa-sliders-h"></i> Controles de Análisis</h3>
+                <div class="analysis-controls">
+                    <div class="control-group">
+                        <label>Tipo de análisis:</label>
+                        <select id="analysisType">
+                            <option value="fundamental">Fundamental</option>
+                            <option value="technical">Técnico</option>
+                            <option value="valuation">Valuación</option>
+                            <option value="risk">Riesgo</option>
+                        </select>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label>Horizonte temporal:</label>
+                        <div class="timeframe-buttons">
+                            <button class="time-btn active" data-time="1M">1M</button>
+                            <button class="time-btn" data-time="3M">3M</button>
+                            <button class="time-btn" data-time="6M">6M</button>
+                            <button class="time-btn" data-time="1Y">1Y</button>
+                            <button class="time-btn" data-time="3Y">3Y</button>
+                        </div>
+                    </div>
+                    
+                    <div class="control-group">
+                        <label>Métricas clave:</label>
+                        <select id="keyMetrics">
+                            <option value="all">Todas las métricas</option>
+                            <option value="valuation">Valuación</option>
+                            <option value="growth">Crecimiento</option>
+                            <option value="profitability">Rentabilidad</option>
+                            <option value="risk">Riesgo/Liquidez</option>
+                        </select>
+                    </div>
+                    
+                    <button class="search-btn" id="compareBtn">
+                        <i class="fas fa-balance-scale"></i> Comparar Activos
+                    </button>
+                </div>
+                
+                <div class="quick-tip">
+                    <h4><i class="fas fa-lightbulb"></i> Consejo Rápido</h4>
+                    <p id="quickTip">Para fondos satélite, examine la concentración del portfolio y el track record del gestor.</p>
+                </div>
+            </aside>
+            
+            <!-- Dashboard -->
+            <main class="dashboard">
+                <!-- Tarjeta 1: Análisis de Valuación -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-chart-bar"></i> Análisis de Valuación Comparativa</h3>
+                        <div class="tooltip">
+                            <i class="fas fa-info-circle"></i>
+                            <span class="tooltiptext">Compara métricas de valuación clave entre activos</span>
+                        </div>
+                    </div>
+                    
+                    <div class="tabs">
+                        <button class="tab-btn active" data-tab="valuationTab">Valuación</button>
+                        <button class="tab-btn" data-tab="growthTab">Crecimiento</button>
+                        <button class="tab-btn" data-tab="riskTab">Riesgo</button>
+                    </div>
+                    
+                    <div class="tab-content active" id="valuationTab">
+                        <div class="chart-container">
+                            <canvas id="valuationChart"></canvas>
+                        </div>
+                        <div class="metrics-grid" id="valuationMetrics">
+                            <!-- Métricas se cargarán con JS -->
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="growthTab">
+                        <div class="chart-container">
+                            <canvas id="growthChart"></canvas>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="riskTab">
+                        <div class="chart-container">
+                            <canvas id="riskChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tarjeta 2: Señales de Compra/Venta -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-balance-scale-right"></i> Señales de Compra/Venta</h3>
+                        <div class="tooltip">
+                            <i class="fas fa-info-circle"></i>
+                            <span class="tooltiptext">Señales basadas en análisis fundamental y técnico</span>
+                        </div>
+                    </div>
+                    
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Activo</th>
+                                <th>Señal</th>
+                                <th>Confianza</th>
+                                <th>Razón Principal</th>
+                            </tr>
+                        </thead>
+                        <tbody id="signalsTable">
+                            <!-- Las señales se cargarán con JS -->
+                        </tbody>
+                    </table>
+                    
+                    <h4><i class="fas fa-list-check"></i> Checklist de Evaluación</h4>
+                    <div class="checklist-grid">
+                        <!-- Checklist se cargará con JS -->
+                    </div>
+                </div>
+                
+                <!-- Tarjeta 3: Rendimiento Comparativo -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-chart-line"></i> Rendimiento Comparativo</h3>
+                        <div class="tooltip">
+                            <i class="fas fa-info-circle"></i>
+                            <span class="tooltiptext">Rendimiento histórico de los activos seleccionados</span>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <canvas id="performanceChart"></canvas>
+                    </div>
+                    
+                    <div class="performance-metrics">
+                        <div class="metric-item">
+                            <div class="metric-label">Mejor rendimiento</div>
+                            <div class="metric-value" id="bestPerformance">-</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-label">Mayor volatilidad</div>
+                            <div class="metric-value" id="highestVolatility">-</div>
+                        </div>
+                        <div class="metric-item">
+                            <div class="metric-label">Correlación promedio</div>
+                            <div class="metric-value" id="avgCorrelation">-</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tarjeta 4: Análisis de Riesgo -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-exclamation-triangle"></i> Análisis de Riesgo</h3>
+                        <div class="tooltip">
+                            <i class="fas fa-info-circle"></i>
+                            <span class="tooltiptext">Evaluación de riesgos específicos para inversiones satélite</span>
+                        </div>
+                    </div>
+                    
+                    <div class="metrics-grid" id="riskMetrics">
+                        <!-- Métricas de riesgo se cargarán con JS -->
+                    </div>
+                    
+                    <h4><i class="fas fa-flag"></i> Catalizadores Identificados</h4>
+                    <div class="catalysts-list">
+                        <!-- Catalizadores se cargarán con JS -->
+                    </div>
+                </div>
+            </main>
+        </div>
+        
+        <footer>
+            <p>SatelliteAnalyzer - Dashboard de análisis para inversiones satélite</p>
+            <p class="disclaimer">
+                <i class="fas fa-exclamation-circle"></i> 
+                Uso educativo. Los datos mostrados son ilustrativos.
+            </p>
+        </footer>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
