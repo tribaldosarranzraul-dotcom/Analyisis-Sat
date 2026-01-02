@@ -1,3 +1,4 @@
+// ARCHIVO COMPLETO script.js
 // Datos de ejemplo para simulación
 const sampleData = {
     ARKK: {
@@ -380,4 +381,255 @@ function getLineOptions() {
 
 // Actualizar todos los gráficos
 function updateAllCharts() {
-    if (selectedAssets
+    if (selectedAssets.length === 0) return;
+    
+    // Actualizar gráfico de valuación
+    const valuationDatasets = [];
+    
+    selectedAssets.forEach(ticker => {
+        if (sampleData[ticker]) {
+            const data = sampleData[ticker];
+            valuationDatasets.push({
+                label: ticker,
+                data: [
+                    data.valuation.pe,
+                    data.valuation.ps,
+                    data.valuation.evEbitda,
+                    data.valuation.pb
+                ],
+                backgroundColor: data.color,
+                borderColor: data.color,
+                borderWidth: 1
+            });
+        }
+    });
+    
+    valuationChart.data.datasets = valuationDatasets;
+    valuationChart.update();
+    
+    // Actualizar gráfico de crecimiento
+    const growthDatasets = [];
+    
+    selectedAssets.forEach(ticker => {
+        if (sampleData[ticker]) {
+            const data = sampleData[ticker];
+            growthDatasets.push({
+                label: ticker,
+                data: [
+                    data.growth.revenue,
+                    data.growth.earnings,
+                    data.growth.cashFlow
+                ],
+                backgroundColor: hexToRgba(data.color, 0.2),
+                borderColor: data.color,
+                borderWidth: 2,
+                pointBackgroundColor: data.color
+            });
+        }
+    });
+    
+    growthChart.data.datasets = growthDatasets;
+    growthChart.update();
+    
+    // Actualizar gráfico de rendimiento
+    const performanceDatasets = [];
+    
+    selectedAssets.forEach(ticker => {
+        if (sampleData[ticker]) {
+            const data = sampleData[ticker];
+            performanceDatasets.push({
+                label: ticker,
+                data: data.performance,
+                borderColor: data.color,
+                backgroundColor: hexToRgba(data.color, 0.1),
+                borderWidth: 2,
+                tension: 0.1
+            });
+        }
+    });
+    
+    performanceChart.data.datasets = performanceDatasets;
+    performanceChart.update();
+    
+    // Actualizar tabla de señales
+    updateSignalsTable();
+    
+    // Actualizar métricas
+    updateMetrics();
+    
+    // Actualizar checklist
+    updateChecklist();
+    
+    // Actualizar catalizadores
+    updateCatalysts();
+}
+
+// Actualizar tabla de señales
+function updateSignalsTable() {
+    const tableBody = document.getElementById('signalsTable');
+    tableBody.innerHTML = '';
+    
+    selectedAssets.forEach(ticker => {
+        if (sampleData[ticker]) {
+            const data = sampleData[ticker];
+            
+            // Determinar señal basada en datos (simulación)
+            let signal, confidence, reason;
+            
+            if (data.valuation.pe < 15 && data.growth.revenue > 10) {
+                signal = 'COMPRA';
+                confidence = Math.floor(Math.random() * 20 + 75);
+                reason = 'Valuación atractiva con crecimiento sólido';
+            } else if (data.valuation.pe > 40 && data.growth.revenue < 5) {
+                signal = 'VENTA';
+                confidence = Math.floor(Math.random() * 20 + 70);
+                reason = 'Valuación extendida con crecimiento débil';
+            } else {
+                signal = 'MANTENER';
+                confidence = Math.floor(Math.random() * 20 + 60);
+                reason = 'Perfil riesgo/retorno equilibrado';
+            }
+            
+            const signalClass = signal === 'COMPRA' ? 'signal-buy' : 
+                              signal === 'VENTA' ? 'signal-sell' : 'signal-hold';
+            
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${ticker}</td>
+                <td><span class="signal-indicator ${signalClass}">${signal}</span></td>
+                <td>${confidence}%</td>
+                <td>${reason}</td>
+            `;
+            
+            tableBody.appendChild(row);
+        }
+    });
+}
+
+// Actualizar métricas
+function updateMetrics() {
+    // En una aplicación real, aquí calcularías métricas reales
+    document.getElementById('bestPerformance').textContent = 'TSLA (+24.5%)';
+    document.getElementById('highestVolatility').textContent = 'ARKK (38.2%)';
+    document.getElementById('avgCorrelation').textContent = '0.62';
+}
+
+// Actualizar checklist
+function updateChecklist() {
+    const checklistGrid = document.querySelector('.checklist-grid');
+    if (!checklistGrid) return;
+    
+    checklistGrid.innerHTML = '';
+    
+    const checklistItems = [
+        'Valuación atractiva vs histórico',
+        'Catalizadores próximos identificados',
+        'Balance saludable',
+        'Tendencia técnica positiva'
+    ];
+    
+    checklistItems.forEach((item, index) => {
+        const div = document.createElement('div');
+        div.className = 'checklist-item';
+        
+        // Verificar si al menos un activo cumple el criterio
+        let isChecked = false;
+        selectedAssets.forEach(ticker => {
+            if (sampleData[ticker] && sampleData[ticker].checklist[index]) {
+                isChecked = true;
+            }
+        });
+        
+        div.innerHTML = `
+            <input type="checkbox" ${isChecked ? 'checked' : ''} id="check${index + 1}">
+            <label for="check${index + 1}">${item}</label>
+        `;
+        
+        checklistGrid.appendChild(div);
+    });
+}
+
+// Actualizar catalizadores
+function updateCatalysts() {
+    const catalystsList = document.querySelector('.catalysts-list');
+    if (!catalystsList) return;
+    
+    catalystsList.innerHTML = '<ul></ul>';
+    const ul = catalystsList.querySelector('ul');
+    
+    selectedAssets.forEach(ticker => {
+        if (sampleData[ticker] && sampleData[ticker].catalysts) {
+            sampleData[ticker].catalysts.forEach(catalyst => {
+                const li = document.createElement('li');
+                li.innerHTML = `<strong>${ticker}:</strong> ${catalyst}`;
+                ul.appendChild(li);
+            });
+        }
+    });
+}
+
+// Actualizar gráfico de rendimiento según timeframe
+function updatePerformanceChart(timeframe) {
+    // En una aplicación real, aquí obtendrías datos según el timeframe
+    let title = 'Rendimiento (1 Mes)';
+    
+    switch(timeframe) {
+        case '3M': title = 'Rendimiento (3 Meses)'; break;
+        case '6M': title = 'Rendimiento (6 Meses)'; break;
+        case '1Y': title = 'Rendimiento (1 Año)'; break;
+        case '3Y': title = 'Rendimiento (3 Años)'; break;
+    }
+    
+    performanceChart.options.plugins.title.text = title;
+    performanceChart.update();
+    
+    showNotification(`Período actualizado a ${timeframe}`, 'info');
+}
+
+// Comparar activos
+function compareAssets() {
+    if (selectedAssets.length < 2) {
+        showNotification('Seleccione al menos 2 activos para comparar', 'warning');
+        return;
+    }
+    
+    showNotification(`Comparando ${selectedAssets.length} activos...`, 'info');
+    
+    // Simular análisis comparativo
+    setTimeout(() => {
+        showNotification('Análisis comparativo completado', 'success');
+        
+        // Actualizar consejo
+        const bestAsset = selectedAssets[Math.floor(Math.random() * selectedAssets.length)];
+        document.getElementById('quickTip').textContent = 
+            `Recomendación: ${bestAsset} muestra la mejor relación riesgo/retorno entre los activos comparados.`;
+    }, 1500);
+}
+
+// Actualizar consejo rápido
+function updateQuickTip() {
+    const analysisType = document.getElementById('analysisType').value;
+    const tips = [
+        "Para fondos satélite, examine la concentración del portfolio y el track record del gestor en diferentes condiciones de mercado.",
+        "En análisis fundamental, compare métricas de valuación con el historial propio de la empresa y con pares del sector.",
+        "Las señales de compra aparecen cuando hay catalizadores próximos no descontados en el precio actual.",
+        "El análisis técnico complementa el fundamental: busque soportes clave y confirmación de volumen.",
+        "Para empresas satélite, evalúe la ventaja competitiva (moat) y su sostenibilidad a largo plazo."
+    ];
+    
+    // Seleccionar un consejo aleatorio
+    const randomTip = tips[Math.floor(Math.random() * tips.length)];
+    document.getElementById('quickTip').textContent = randomTip;
+}
+
+// Mostrar notificación
+function showNotification(message, type) {
+    // Crear notificación
+    const notification = document.createElement('div');
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 15px 20px;
+        background-color: ${type === 'success' ? '#27ae60' : type === 'warning' ? '#f39c12' : '#3498db'};
+       
